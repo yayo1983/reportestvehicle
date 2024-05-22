@@ -7,6 +7,11 @@ Este proyecto es un backend para una empresa transportista, diseñado para admin
 - **Registro de vehículos:** Permite registrar nuevos vehículos en el sistema.
 - **Gestión de órdenes de servicio:** Permite crear y gestionar órdenes de servicio de mantenimiento para los vehículos registrados.
 
+## Casos de uso del proyecto
+
+[Puede leer la descripción de los casos de uso del proyecto en el siguiente enlace](https://docs.google.com/document/d/1rc_qwah9lSTGPdX6mdccUc8dwKAVXa7yAI17hzhXfYY/edit?hl=es)
+
+
 ## Requisitos
 
 - Python 3.10 o superior
@@ -80,3 +85,22 @@ Para ejecutar el servidor de desarrollo, usa el siguiente comando:
 
 ```sh
 uvicorn app.main:app --reload
+```
+
+## Utilizando Docker
+1. Construir la imagen Docker:
+```sh
+docker build -t nombre-de-tu-imagen .
+```
+
+2. Ejecutar el contenedor:
+```sh
+docker run -d -p 8000:8000 nombre-de-tu-imagen
+```
+
+## Utilizando Docker Compose
+
+1. Construir y ejecutar los contenedores con Docker Compose:
+```sh
+docker-compose up --build
+```
