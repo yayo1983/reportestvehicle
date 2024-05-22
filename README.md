@@ -109,6 +109,14 @@ docker run -d -p 8000:8000 nombre-de-tu-imagen
 ```sh
 docker-compose up --build
 ```
+O realizar por separado la construcción y levantamiento del contenedor y así no tener que construirlo si ya está hecho
+```sh
+docker-compose build
+```
+y 
+```sh
+docker-compose up
+```
 
 ## Ejecutando las pruebas
 

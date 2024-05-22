@@ -5,6 +5,9 @@ services:
     build: .
     ports:
       - "8000:8000"
+    volumes:
+      - .:/app # mounts the current directory in the container to /app,
+        #allowing changes to your local file system to be reflected within the container.
     environment:
       - UVICORN_HOST=0.0.0.0
       - UVICORN_PORT=8000
