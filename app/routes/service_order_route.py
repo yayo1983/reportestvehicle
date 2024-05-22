@@ -13,6 +13,6 @@ def create_service_order(service_order: ServiceOrderCreate, db: Session = Depend
     return presenter.create_service_order(service_order)
 
 @router.get("/", response_model=List[ServiceOrderRead])
-def get_service_orders(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+def get_service_orders(skip: int = 0, limit: int = 30, db: Session = Depends(get_db)):
     presenter = ServiceOrderPresenter(db)
     return presenter.get_service_orders(skip, limit)

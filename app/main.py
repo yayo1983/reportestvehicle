@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from app.routes import vehicle_route, service_order_route
 from app.database import Base, engine
 
-# Crear todas las tablas
+# Create all tables
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(

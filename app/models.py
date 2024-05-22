@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from app.database import Base
 
+
 class Vehicle(Base):
     __tablename__ = "vehicles"
 
@@ -11,6 +12,8 @@ class Vehicle(Base):
     year = Column(Integer)
     current_mileage = Column(Float)
     service_orders = relationship("ServiceOrder", back_populates="vehicle")
+    class Config:
+        from_attributes = True  # Enable validation from ORM attributes
 
 class ServiceOrder(Base):
     __tablename__ = "service_orders"
@@ -21,3 +24,5 @@ class ServiceOrder(Base):
     date = Column(DateTime)
     cost = Column(Float)
     vehicle = relationship("Vehicle", back_populates="service_orders")
+
+    
