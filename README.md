@@ -49,9 +49,10 @@ transportista_backend/
 ```
 
 ## Arquitectura de la solución
-
+Vista de general de la solución
 ![Vista de general de la solución](diag_general.png)
 
+Vista de componenentes de la solución
 ![Vista de componenentes de la solución](diag_componentes.png)
 
 ## Instalación
