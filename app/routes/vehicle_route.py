@@ -5,14 +5,21 @@ from app.schemas import VehicleCreate, VehicleRead
 from app.database import get_db
 from app.presenters.vehicle_presenter import VehiclePresenter
 
-router = APIRouter()
 
-@router.post("/", response_model=VehicleRead)
-def create_vehicle(vehicle: VehicleCreate, db: Session = Depends(get_db)):
-    presenter = VehiclePresenter(db)
-    return presenter.create_vehicle(vehicle)
+class VehicleRouter:
+    def __init__(self):
+        self.router = APIRouter()
+        self._setup_routes()
 
-@router.get("/", response_model=List[VehicleRead])
-def get_vehicles(skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
-    presenter = VehiclePresenter(db)
-    return presenter.get_vehicles(skip, limit)
+    def _setup_routes(self):
+        self.router.post("/", response_model=VehicleRead)(self.create_vehicle)
+        self.router.get("/", response_model=List[VehicleRead])(self.get_vehicles)
+
+
+    def create_vehicle(self, vehicle: VehicleCreate, db: Session = Depends(get_db)):
+        presenter = VehiclePresenter(db)
+        return presenter.create_vehicle(vehicle)
+
+    def get_vehicles(self, skip: int = 0, limit: int = 10, db: Session = Depends(get_db)):
+        presenter = VehiclePresenter(db)
+        return presenter.get_vehicles(skip, limit)

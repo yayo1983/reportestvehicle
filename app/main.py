@@ -1,6 +1,8 @@
 from fastapi import FastAPI
-from app.routes import vehicle_route, service_order_route
 from app.database import Base, engine
+from app.routes.service_order_route import ServiceOrderRouter
+from app.routes.vehicle_route import VehicleRouter
+
 
 # Create all tables
 Base.metadata.create_all(bind=engine)
@@ -8,11 +10,15 @@ Base.metadata.create_all(bind=engine)
 app = FastAPI(
     title="Transportista Backend API",
     description="API para administrar los procesos de mantenimiento de vehículos.",
-    version="1.0.0"
+    version="1.0.0",
 )
 
-app.include_router(vehicle_route.router, prefix="/api/v1/vehicles", tags=["vehicles"])
-app.include_router(service_order_route.router, prefix="/api/v1/service_orders", tags=["service_orders"])
+# Instantiate the service command router
+service_vehicle_router = VehicleRouter()
+service_order_router = ServiceOrderRouter()
+# Include the router in the FastAPI application
+app.include_router(service_vehicle_router.router, prefix="/api/v1/vehicles")
+app.include_router(service_order_router.router, prefix="/service_orders")
 
-# La documentación de Swagger estará disponible en /docs por defecto
-# La documentación de ReDoc estará disponible en /redoc por defecto
+# Swagger documentation will be available at /docs por defecto
+# ReDoc documentation will be available at /redoc por defecto
