@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from app.database import get_db
+from database import get_db
 from sqlalchemy.exc import NoResultFound
-from app.presenters.service_order_presenter import ServiceOrderPresenter
-from app.schemas import ServiceOrderCreate, ServiceOrderRead, ServiceOrderUpdate
+from presenters.service_order_presenter import ServiceOrderPresenter
+from schemas import ServiceOrderCreate, ServiceOrderRead, ServiceOrderUpdate
 from typing import List
 
 class ServiceOrderRouter:

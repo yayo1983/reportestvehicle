@@ -11,7 +11,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 # Import all necessary models
-from app.models import Vehicle, ServiceOrder
+from models import Vehicle, ServiceOrder
 
 def get_db():
     db = SessionLocal()

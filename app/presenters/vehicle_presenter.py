@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from app.models import Vehicle
-from app.schemas import VehicleCreate, VehicleRead
+from models import Vehicle
+from schemas import VehicleCreate, VehicleRead
 from sqlalchemy.exc import SQLAlchemyError
 
 

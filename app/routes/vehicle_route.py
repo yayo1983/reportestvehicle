@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from typing import List
-from app.schemas import VehicleCreate, VehicleRead
-from app.database import get_db
-from app.presenters.vehicle_presenter import VehiclePresenter
+from schemas import VehicleCreate, VehicleRead
+from database import get_db
+from presenters.vehicle_presenter import VehiclePresenter
 
 
 class VehicleRouter:

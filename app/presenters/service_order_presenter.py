@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import NoResultFound, SQLAlchemyError
-from app.models import ServiceOrder
-from app.schemas import ServiceOrderCreate, ServiceOrderRead, ServiceOrderUpdate
+from models import ServiceOrder
+from schemas import ServiceOrderCreate, ServiceOrderRead, ServiceOrderUpdate
 
 class ServiceOrderPresenter:
 
