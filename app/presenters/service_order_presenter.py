@@ -1,14 +1,17 @@
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import NoResultFound, SQLAlchemyError
-from models import ServiceOrder
-from schemas import ServiceOrderCreate, ServiceOrderRead, ServiceOrderUpdate
+from app.models import ServiceOrder
+from app.schemas import ServiceOrderCreate, ServiceOrderRead, ServiceOrderUpdate
+
 
 class ServiceOrderPresenter:
 
     def __init__(self, db: Session):
         self.db = db
 
-    def create_service_order(self, service_order: ServiceOrderCreate) -> ServiceOrderRead:
+    def create_service_order(
+        self, service_order: ServiceOrderCreate
+    ) -> ServiceOrderRead:
         try:
             db_service_order = ServiceOrder(**service_order.model_dump())
             self.db.add(db_service_order)
@@ -28,16 +31,22 @@ class ServiceOrderPresenter:
 
     def get_service_order(self, order_id: int) -> ServiceOrderRead:
         try:
-            db_service_order = self.db.query(ServiceOrder).filter(ServiceOrder.id == order_id).first()
+            db_service_order = (
+                self.db.query(ServiceOrder).filter(ServiceOrder.id == order_id).first()
+            )
             if not db_service_order:
                 raise NoResultFound(f"Service order with id {order_id} not found")
             return db_service_order
         except SQLAlchemyError as e:
             raise e  # Re-raise the exception for further handling
 
-    def update_service_order(self, order_id: int, service_order: ServiceOrderUpdate) -> ServiceOrderRead:
+    def update_service_order(
+        self, order_id: int, service_order: ServiceOrderUpdate
+    ) -> ServiceOrderRead:
         try:
-            db_service_order = self.db.query(ServiceOrder).filter(ServiceOrder.id == order_id).first()
+            db_service_order = (
+                self.db.query(ServiceOrder).filter(ServiceOrder.id == order_id).first()
+            )
             if not db_service_order:
                 raise NoResultFound(f"Service order with id {order_id} not found")
             for key, value in service_order.model_dump(exclude_unset=True).items():
@@ -51,7 +60,9 @@ class ServiceOrderPresenter:
 
     def delete_service_order(self, order_id: int):
         try:
-            db_service_order = self.db.query(ServiceOrder).filter(ServiceOrder.id == order_id).first()
+            db_service_order = (
+                self.db.query(ServiceOrder).filter(ServiceOrder.id == order_id).first()
+            )
             if not db_service_order:
                 raise NoResultFound(f"Service order with id {order_id} not found")
             self.db.delete(db_service_order)

@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
-from database import Base
+from app.database import Base
 
 
 class Vehicle(Base):
@@ -23,5 +23,3 @@ class ServiceOrder(Base):
     date = Column(DateTime)
     cost = Column(Float)
     vehicle = relationship("Vehicle", back_populates="service_orders")
-
-    

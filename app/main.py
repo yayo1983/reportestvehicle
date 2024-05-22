@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from database import Base, engine
-from routes.service_order_route import ServiceOrderRouter
-from routes.vehicle_route import VehicleRouter
+from app.database import Base, engine
+from app.routes.service_order_route import ServiceOrderRouter
+from app.routes.vehicle_route import VehicleRouter
 
 
 class MyApp:
@@ -48,12 +48,5 @@ class MyApp:
         # Swagger documentation will be available at /docs by default
         # ReDoc documentation will be available at /redoc by default
 
-    def run(self):
-        import uvicorn
-
-        uvicorn.run(self.app, host="0.0.0.0", port=8000)
-
-
-if __name__ == "__main__":
-    my_app = MyApp()
-    my_app.run()
+my_app = MyApp()
+app = my_app.app
