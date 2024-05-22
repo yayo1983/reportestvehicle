@@ -118,3 +118,15 @@ docker run -d -p 8000:8000 nombre-de-tu-imagen
 ```sh
 docker-compose up --build
 ```
+
+## Ejecutando las pruebas
+
+Para ejecutar todas las pruebas solo es necesario
+```sh
+pytest
+
+```
+En caso de querer ejecutar solo un archivo de pruebas, puede poner el nombre del archivo como a continuación se presenta
+```sh
+pytest tests/unit/test_vehicle_presenter.py
+```
