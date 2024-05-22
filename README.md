@@ -17,24 +17,31 @@ Este proyecto es un backend para una empresa transportista, diseñado para admin
 - Pydantic
 
 ## Estructura básica del proyecto
+
+```sh
 transportista_backend/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py
 │   ├── models.py
 │   ├── schemas.py
-│   ├── crud.py
 │   ├── database.py
 │   ├── routers/
 │   │   ├── __init__.py
 │   │   ├── vehicles.py
 │   │   ├── service_orders.py
+│   ├── presenters/
+│   │   ├── __init__.py
+│   │   ├── vehicle_presenter.py
+│   │   ├── service_order_presenter.py
+│   ├── views/
+│   │   ├── __init__.py
+│   │   ├── vehicle_view.py
+│   │   ├── service_order_view.py
+├── tests/
+│   ├── test_integration.py
 ├── requirements.txt
-├── alembic/
-│   ├── env.py
-│   ├── versions/
-│   │   └── (migration files)
-
+```
 
 ## Instalación
 

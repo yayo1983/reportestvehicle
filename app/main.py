@@ -1,11 +1,13 @@
 from fastapi import FastAPI
-from .routers import vehicles, service_orders
-from app.database import engine, Base
-
-
-Base.metadata.create_all(bind=engine)
+from app.views import vehicle_view, service_order_view
+from app.database import engine
+from app.models import Base
 
 app = FastAPI()
 
-app.include_router(vehicles.router, prefix="/api/v1")
-app.include_router(service_orders.router, prefix="/api/v1")
+# Create all tables
+Base.metadata.create_all(bind=engine)
+
+# Include routers
+app.include_router(vehicle_view.router, prefix="/api/v1")
+app.include_router(service_order_view.router, prefix="/api/v1")

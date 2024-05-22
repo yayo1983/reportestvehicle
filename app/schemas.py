@@ -15,7 +15,7 @@ class ServiceOrder(ServiceOrderBase):
     vehicle_id: int
 
     class Config:
-        from_attributes = True
+        from_atributes = True
 
 class VehicleBase(BaseModel):
     license_plate: str
@@ -31,4 +31,4 @@ class Vehicle(VehicleBase):
     service_orders: List[ServiceOrder] = []
 
     class Config:
-        from_attributes = True
+        from_atributes = True
