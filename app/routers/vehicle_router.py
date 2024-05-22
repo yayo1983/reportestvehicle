@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter
 from typing import List
 from app.models import Vehicle
 from app.schemas import VehicleCreate, VehicleRead

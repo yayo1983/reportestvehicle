@@ -48,6 +48,12 @@ transportista_backend/
 ├── requirements.txt
 ```
 
+## Arquitectura de la solución
+
+![Vista de general de la solución](diag_general.png)
+
+![Vista de componenentes de la solución](diag_componentes.png)
+
 ## Instalación
 
 1. Clona el repositorio:
