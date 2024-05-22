@@ -84,15 +84,6 @@ Puede acceder a editar en línea el UML en la siguiente liga
     pip install -r requirements.txt
     ```
 
-4. Configura la base de datos:
-
-    - Edita `database.py` para configurar la URL de tu base de datos.
-    - Realiza las migraciones iniciales:
-
-    ```sh
-    alembic upgrade head
-    ```
-
 ## Ejecución
 
 Para ejecutar el servidor de desarrollo, usa el siguiente comando:
