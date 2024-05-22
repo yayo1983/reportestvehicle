@@ -12,8 +12,7 @@ class Vehicle(Base):
     year = Column(Integer)
     current_mileage = Column(Float)
     service_orders = relationship("ServiceOrder", back_populates="vehicle")
-    class Config:
-        from_attributes = True  # Enable validation from ORM attributes
+
 
 class ServiceOrder(Base):
     __tablename__ = "service_orders"

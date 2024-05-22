@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from datetime import datetime
 from typing import List
 from typing import Optional
@@ -19,9 +19,7 @@ class ServiceOrderUpdate(ServiceOrderBase):
 class ServiceOrderRead(ServiceOrderBase):
     id: int
     vehicle_id: Optional[int] = None
-
-    class Config:
-        from_atributes = True
+    model_config = ConfigDict(from_attributes=True)
 
 
 class VehicleBase(BaseModel):
@@ -38,6 +36,4 @@ class VehicleCreate(VehicleBase):
 class VehicleRead(VehicleBase):
     id: int
     service_orders: List[ServiceOrderRead] = []
-
-    class Config:
-        from_attributes = True  # Enable validation from ORM attributes
+    model_config = ConfigDict(from_attributes=True)  # Enable validation from ORM attributes

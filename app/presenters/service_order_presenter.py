@@ -10,7 +10,7 @@ class ServiceOrderPresenter:
 
     def create_service_order(self, service_order: ServiceOrderCreate) -> ServiceOrderRead:
         try:
-            db_service_order = ServiceOrder(**service_order.dict())
+            db_service_order = ServiceOrder(**service_order.model_dump())
             self.db.add(db_service_order)
             self.db.commit()
             self.db.refresh(db_service_order)
@@ -40,7 +40,7 @@ class ServiceOrderPresenter:
             db_service_order = self.db.query(ServiceOrder).filter(ServiceOrder.id == order_id).first()
             if not db_service_order:
                 raise NoResultFound(f"Service order with id {order_id} not found")
-            for key, value in service_order.dict(exclude_unset=True).items():
+            for key, value in service_order.model_dump(exclude_unset=True).items():
                 setattr(db_service_order, key, value)
             self.db.commit()
             self.db.refresh(db_service_order)
