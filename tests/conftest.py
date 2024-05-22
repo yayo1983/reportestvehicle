@@ -15,11 +15,13 @@ Base.metadata.create_all(bind=engine)
 
 @pytest.fixture(scope="module")
 def db():
-    db = TestingSessionLocal()
+    Base.metadata.create_all(bind=engine)
     try:
+        db = TestingSessionLocal()
         yield db
     finally:
         db.close()
+        Base.metadata.drop_all(bind=engine)
 
 @pytest.fixture(scope="module")
 def client(db):
@@ -30,6 +32,5 @@ def client(db):
             db.close()
     
     app.dependency_overrides[get_db] = override_get_db
-    client = TestClient(app)
-    yield client
-    app.dependency_overrides[get_db] = get_db
+    with TestClient(app) as c:
+        yield c

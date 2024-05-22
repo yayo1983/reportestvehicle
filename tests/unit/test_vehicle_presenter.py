@@ -20,12 +20,12 @@ def test_create_vehicle(db):
 def test_get_vehicles(db):
     presenter = VehiclePresenter(db)
     vehicle_data = VehicleCreate(
-        license_plate="ABC123",
+        license_plate="ABC12312",
         model="Truck",
         year=2010,
         current_mileage=100000.0
     )
     presenter.create_vehicle(vehicle_data)
     vehicles = presenter.get_vehicles()
-    assert len(vehicles) == 1
-    assert vehicles[0].license_plate == "ABC123"
+    assert len(vehicles) == 2
+    assert vehicles[1].license_plate == "ABC12312"
