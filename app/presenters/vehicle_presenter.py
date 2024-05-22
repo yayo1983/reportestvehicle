@@ -12,8 +12,8 @@ class VehiclePresenter:
         self.db.add(db_vehicle)
         self.db.commit()
         self.db.refresh(db_vehicle)
-        return VehicleRead.model_validate(db_vehicle)
+        return db_vehicle
 
     def get_vehicles(self, skip: int = 0, limit: int = 10):
         vehicles = self.db.query(Vehicle).offset(skip).limit(limit).all()
-        return [VehicleRead.model_validate(vehicle) for vehicle in vehicles]
+        return [vehicle for vehicle in vehicles]
