@@ -1,13 +1,14 @@
 from fastapi import FastAPI
-from app.views import vehicle_view, service_order_view
-from app.database import engine
-from app.models import Base
+from app.routers import vehicle_router, service_order_router
 
-app = FastAPI()
+app = FastAPI(
+    title="Transportista Backend API",
+    description="API para administrar los procesos de mantenimiento de vehículos.",
+    version="1.0.0"
+)
 
-# Create all tables
-Base.metadata.create_all(bind=engine)
+app.include_router(vehicle_router.router, prefix="/api/v1/vehicles", tags=["vehicles"])
+app.include_router(service_order_router.router, prefix="/api/v1/service_orders", tags=["service_orders"])
 
-# Include routers
-app.include_router(vehicle_view.router, prefix="/api/v1")
-app.include_router(service_order_view.router, prefix="/api/v1")
+# Swagger documentation will be available in /docs by default
+# ReDoc documentation will be available in /redoc by default

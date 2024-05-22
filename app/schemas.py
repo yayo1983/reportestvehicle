@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import List, Optional
+from typing import List
 
 class ServiceOrderBase(BaseModel):
     description: str
@@ -10,7 +10,7 @@ class ServiceOrderBase(BaseModel):
 class ServiceOrderCreate(ServiceOrderBase):
     pass
 
-class ServiceOrder(ServiceOrderBase):
+class ServiceOrderRead(ServiceOrderBase):
     id: int
     vehicle_id: int
 
@@ -26,9 +26,9 @@ class VehicleBase(BaseModel):
 class VehicleCreate(VehicleBase):
     pass
 
-class Vehicle(VehicleBase):
+class VehicleRead(VehicleBase):
     id: int
-    service_orders: List[ServiceOrder] = []
+    service_orders: List[ServiceOrderRead] = []
 
     class Config:
         from_atributes = True

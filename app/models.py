@@ -1,9 +1,10 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from app.database import Base
 
 class Vehicle(Base):
     __tablename__ = "vehicles"
+
     id = Column(Integer, primary_key=True, index=True)
     license_plate = Column(String, unique=True, index=True)
     model = Column(String)
@@ -13,6 +14,7 @@ class Vehicle(Base):
 
 class ServiceOrder(Base):
     __tablename__ = "service_orders"
+
     id = Column(Integer, primary_key=True, index=True)
     vehicle_id = Column(Integer, ForeignKey("vehicles.id"))
     description = Column(String)
