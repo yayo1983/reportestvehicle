@@ -28,24 +28,27 @@ transportista_backend/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py
-│   ├── models.py
-│   ├── schemas.py
-│   ├── database.py
-│   ├── routers/
+│   ├── models/
 │   │   ├── __init__.py
-│   │   ├── vehicles.py
-│   │   ├── service_orders.py
+│   │   ├── vehicle.py
+│   │   └── service_order.py
+│   ├── schemas/
+│   │   ├── __init__.py
+│   │   ├── vehicle.py
+│   │   └── service_order.py
+│   ├── database.py
 │   ├── presenters/
 │   │   ├── __init__.py
 │   │   ├── vehicle_presenter.py
-│   │   ├── service_order_presenter.py
-│   ├── views/
-│   │   ├── __init__.py
-│   │   ├── vehicle_view.py
-│   │   ├── service_order_view.py
-├── tests/
-│   ├── test_integration.py
+│   │   └── service_order_presenter.py
+│   └── routes/
+│       ├── __init__.py
+│       ├── vehicle_route.py
+│       └── service_order_route.py
+├── Dockerfile
+├── docker-compose.yml
 ├── requirements.txt
+└── README.md
 ```
 
 ## Arquitectura de la solución

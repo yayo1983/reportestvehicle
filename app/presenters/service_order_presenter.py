@@ -1,16 +1,19 @@
 from sqlalchemy.orm import Session
-from app import models, schemas
+from app.models import ServiceOrder
+from app.schemas import ServiceOrderCreate, ServiceOrderRead
 
 class ServiceOrderPresenter:
+
     def __init__(self, db: Session):
         self.db = db
 
-    def create_service_order(self, vehicle_id: int, service_order: schemas.ServiceOrderCreate) -> models.ServiceOrder:
-        db_service_order = models.ServiceOrder(**service_order.dict(), vehicle_id=vehicle_id)
+    def create_service_order(self, service_order: ServiceOrderCreate) -> ServiceOrderRead:
+        db_service_order = ServiceOrder(**service_order.dict())
         self.db.add(db_service_order)
         self.db.commit()
         self.db.refresh(db_service_order)
-        return db_service_order
+        return ServiceOrderRead.from_orm(db_service_order)
 
-    def get_service_orders(self) -> list[models.ServiceOrder]:
-        return self.db.query(models.ServiceOrder).all()
+    def get_service_orders(self, skip: int = 0, limit: int = 10):
+        service_orders = self.db.query(ServiceOrder).offset(skip).limit(limit).all()
+        return [ServiceOrderRead.from_orm(order) for order in service_orders]

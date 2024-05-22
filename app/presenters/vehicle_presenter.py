@@ -1,16 +1,19 @@
 from sqlalchemy.orm import Session
-from app import models, schemas
+from app.models import Vehicle
+from app.schemas import VehicleCreate, VehicleRead
 
 class VehiclePresenter:
+
     def __init__(self, db: Session):
         self.db = db
 
-    def create_vehicle(self, vehicle: schemas.VehicleCreate) -> models.Vehicle:
-        db_vehicle = models.Vehicle(**vehicle.dict())
+    def create_vehicle(self, vehicle: VehicleCreate) -> VehicleRead:
+        db_vehicle = Vehicle(**vehicle.model_dump())
         self.db.add(db_vehicle)
         self.db.commit()
         self.db.refresh(db_vehicle)
-        return db_vehicle
+        return VehicleRead.model_validate(db_vehicle)
 
-    def get_vehicles(self) -> list[models.Vehicle]:
-        return self.db.query(models.Vehicle).all()
+    def get_vehicles(self, skip: int = 0, limit: int = 10):
+        vehicles = self.db.query(Vehicle).offset(skip).limit(limit).all()
+        return [VehicleRead.model_validate(vehicle) for vehicle in vehicles]

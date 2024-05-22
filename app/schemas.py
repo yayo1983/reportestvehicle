@@ -30,5 +30,3 @@ class VehicleRead(VehicleBase):
     id: int
     service_orders: List[ServiceOrderRead] = []
 
-    class Config:
-        from_atributes = True
