@@ -13,6 +13,8 @@ class ServiceOrderBase(BaseModel):
 class ServiceOrderCreate(ServiceOrderBase):
     vehicle_id: Optional[int] = None
 
+class ServiceOrderUpdate(ServiceOrderBase):
+    vehicle_id: Optional[int] = None    
 
 class ServiceOrderRead(ServiceOrderBase):
     id: int
