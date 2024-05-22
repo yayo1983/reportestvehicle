@@ -55,6 +55,10 @@ Vista de general de la solución
 Vista de componenentes de la solución
 ![Vista de componenentes de la solución](diag_componentes.png)
 
+Puede acceder a editar en línea el UML en la siguiente liga
+[Liga para editar diagrama de arquitectura](https://app.diagrams.net/#G1irOYbUKjsVE3pzX8qsMe35B2b8T-PL6b#%7B%22pageId%22%3A%22b5b7bab2-c9e2-2cf4-8b2a-24fd1a2a6d21%22%7D)
+
+
 ## Instalación
 
 1. Clona el repositorio:
