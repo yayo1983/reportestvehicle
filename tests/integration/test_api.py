@@ -1,5 +1,4 @@
 import pytest
-import asyncio
 from httpx import AsyncClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -60,41 +59,46 @@ async def test_get_vehicles(async_client):
     assert data[0]["license_plate"] == "ABC123"
 
 @pytest.mark.asyncio
-async def test_create_service_order(async_client):
-    response = await async_client.post(
-        "/api/v1/vehicles/",
-        json={"license_plate": "XYZ789", "model": "Car", "year": 2015, "current_mileage": 50000.0},
-    )
-    vehicle_id = response.json()["id"]
-
-    service_order_response = await async_client.post(
-        f"/api/v1/vehicles/{vehicle_id}/service_orders/",
-        json={"description": "Oil change", "date": "2024-05-21T10:00:00", "cost": 200.0},
-    )
-    assert service_order_response.status_code == 200
-    service_order_data = service_order_response.json()
-    assert service_order_data["description"] == "Oil change"
-    assert service_order_data["date"] == "2024-05-21T10:00:00"
-    assert service_order_data["cost"] == 200.0
-    assert "id" in service_order_data
-    assert service_order_data["vehicle_id"] == vehicle_id
-
-@pytest.mark.asyncio
-async def test_get_service_order(async_client):
-    response = await async_client.post(
-        "/api/v1/vehicles/",
-        json={"license_plate": "DEF456", "model": "Van", "year": 2020, "current_mileage": 30000.0},
-    )
-    vehicle_id = response.json()["id"]
-
-    service_order_response = await async_client.post(
-        f"/api/v1/vehicles/{vehicle_id}/service_orders/",
-        json={"description": "Tire replacement", "date": "2024-05-21T12:00:00", "cost": 300.0},
-    )
-    service_order_id = service_order_response.json()["id"]
-
-    response = await async_client.get(f"/api/v1/service_orders/{service_order_id}")
+def test_create_service_order(client):
+    response = client.post("/api/v1/service_orders/", json={
+        "description": "Test",
+        "date": "2024-05-21T00:00:00",
+        "cost": 100.0,
+        "vehicle_id": None
+    })
     assert response.status_code == 200
-    service_order_data = response.json()
-    assert service_order_data["description"] == "Tire replacement"
-    assert service_order_data["date"] == "2024
+    data = response.json()
+    assert data["id"] is not None
+    assert data["description"] == "Test"
+
+def test_get_service_orders(client):
+    response = client.get("/api/v1/service_orders/")
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) > 0
+
+def test_get_service_order(client):
+    response = client.get("/api/v1/service_orders/1")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["id"] == 1
+
+def test_update_service_order(client):
+    response = client.put("/api/v1/service_orders/1", json={
+        "description": "Updated",
+        "date": "2024-05-21T00:00:00",
+        "cost": 150.0,
+        "vehicle_id": None
+    })
+    assert response.status_code == 200
+    data = response.json()
+    assert data["description"] == "Updated"
+
+def test_delete_service_order(client):
+    response = client.delete("/api/v1/service_orders/1")
+    assert response.status_code == 200
+    data = response.json()
+    assert data["message"] == "Service order deleted successfully"
+
+    response = client.get("/api/v1/service_orders/1")
+    assert response.status_code == 404

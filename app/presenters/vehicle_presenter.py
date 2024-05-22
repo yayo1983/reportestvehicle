@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from app.models import Vehicle
 from app.schemas import VehicleCreate, VehicleRead
-from sqlalchemy.exc import NoResultFound, SQLAlchemyError
+from sqlalchemy.exc import SQLAlchemyError
 
 
 class VehiclePresenter:
